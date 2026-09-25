@@ -8,18 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#1B2A4A;
-  --navy-deep:#0D1730;
-  --gold:#C89B3C;
-  --gold-soft:#E8CE96;
-  --cream:#FBF8F2;
-  --paper:#F3EEE3;
-  --ink:#22262E;
-  --slate:#565C68;
-  --line:#E1DACB;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+  --navy:#1B2A4A;--navy-deep:#0D1730;--gold:#C89B3C;--gold-soft:#E8CE96;
+  --cream:#FBF8F2;--paper:#F3EEE3;--ink:#22262E;--slate:#565C68;--line:#E1DACB;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:inherit;margin:0;padding:0;}
 html{scroll-behavior:smooth;scroll-padding-top:74px;}
@@ -28,6 +19,15 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--navy-deep);}
 a{color:inherit;}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
 .kicker{font-size:13px;letter-spacing:.06em;color:var(--gold);font-weight:600;margin-bottom:10px;}
+
+/* IMAGE FRAMES (swap src to add real photos) */
+.img-frame{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--navy-deep));}
+.img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-frame .img-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;color:var(--gold-soft);font-size:11.5px;padding:10px;line-height:1.4;}
+.img-frame.img-missing img{display:none;}
+.img-frame.img-missing .img-fallback{display:flex;}
+.img-frame.circle{border-radius:50%;aspect-ratio:1/1;}
+.img-frame.round{border-radius:10px;}
 
 /* NAV */
 nav{position:sticky;top:0;top:env(safe-area-inset-top,0px);background:var(--navy-deep);z-index:30;border-bottom:1px solid rgba(255,255,255,.08);}
@@ -39,8 +39,8 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-
 .brand-text span{display:block;}
 .brand-text .full{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .brand-text .sub{color:#93A0BF;font-size:11px;letter-spacing:.04em;}
-nav ul{list-style:none;display:flex;gap:24px;}
-nav a{color:#CBD2E3;text-decoration:none;font-size:14.5px;transition:color .15s ease;position:relative;padding-bottom:4px;}
+nav ul{list-style:none;display:flex;gap:20px;}
+nav a{color:#CBD2E3;text-decoration:none;font-size:14px;transition:color .15s ease;position:relative;padding-bottom:4px;}
 nav a:hover,nav a:focus{color:var(--gold);}
 nav a.active{color:var(--gold);font-weight:600;}
 nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold);border-radius:2px;}
@@ -57,19 +57,22 @@ nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;heig
 .nav-scrim.open{display:block;}
 @media(max-width:760px){
   .nav-toggle{display:block;}
-  nav ul{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(260px,74vw);background:var(--navy-deep);flex-direction:column;gap:0;padding:calc(90px + env(safe-area-inset-top,0px)) 28px 28px;transform:translateX(100%);transition:transform .25s ease;box-shadow:-8px 0 24px rgba(0,0,0,.3);z-index:26;}
+  nav ul{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(260px,74vw);background:var(--navy-deep);flex-direction:column;gap:0;padding:calc(90px + env(safe-area-inset-top,0px)) 28px 28px;transform:translateX(100%);transition:transform .25s ease;box-shadow:-8px 0 24px rgba(0,0,0,.3);z-index:26;overflow-y:auto;}
   nav ul.open{transform:translateX(0);}
   nav ul li{border-bottom:1px solid rgba(255,255,255,.08);}
   nav ul li a{display:block;padding:14px 0;font-size:16px;}
 }
 
 /* HERO */
-header.hero{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);position:relative;overflow:hidden;padding:80px 0 72px;}
+header.hero{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);position:relative;overflow:hidden;padding:70px 0;}
 header.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(200,155,60,.16),transparent 70%);}
-header.hero .wrap{position:relative;max-width:720px;}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr;}}
 header.hero p.kicker{color:var(--gold-soft);font-size:16px;}
 header.hero h1{font-size:clamp(30px,5vw,44px);line-height:1.18;color:var(--cream);margin-bottom:18px;font-weight:600;}
 header.hero p.lead{font-size:18.5px;color:#C9D0E2;max-width:54ch;margin-bottom:30px;}
+.hero-photo{width:100%;aspect-ratio:4/5;box-shadow:0 20px 44px rgba(0,0,0,.35);}
+@media(max-width:760px){.hero-photo{aspect-ratio:16/10;}}
 .btn{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:13px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.02em;border:none;cursor:pointer;}
 .btn.outline{background:transparent;border:1.5px solid rgba(255,255,255,.45);color:var(--cream);margin-left:12px;}
 .btn:hover{opacity:.9;}
@@ -79,11 +82,9 @@ section{padding:60px 0;border-bottom:1px solid var(--line);}
 section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 .note{margin-top:18px;font-size:12.5px;color:#A79A82;font-style:italic;}
 
-/* PROBLEMS / WHY / TESTIMONY / FINAL CTA */
-#problems ol{list-style:none;display:flex;flex-direction:column;gap:14px;margin:24px 0;max-width:640px;}
+#problems ol{list-style:none;display:flex;flex-direction:column;gap:14px;margin:24px 0;max-width:640px;counter-reset:prob;}
 #problems ol li{padding-left:34px;position:relative;font-size:16px;color:#3A3E45;}
 #problems ol li b{color:var(--navy-deep);}
-#problems ol{counter-reset:prob;}
 #problems ol li::before{counter-increment:prob;content:counter(prob);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy-deep);font-family:'Fraunces',serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
 #problems .scripture{margin-top:8px;font-style:italic;color:var(--slate);}
 #why{background:var(--paper);}
@@ -93,10 +94,16 @@ section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 #testimony .wrap{max-width:640px;}
 #testimony p.q{font-family:'Fraunces',serif;font-size:22px;font-style:italic;color:var(--cream);margin-bottom:16px;}
 #testimony p.a{color:var(--gold-soft);font-weight:600;font-size:14px;}
-#final-cta{text-align:center;border-bottom:none;}
+#final-cta{text-align:center;}
 #final-cta h2{font-size:26px;}
 
+/* GALLERY */
+#gallery{text-align:center;background:var(--paper);}
+.gallery-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:24px 0 6px;}
+.gallery-row .img-frame{width:96px;height:96px;flex:none;border:3px solid var(--cream);box-shadow:0 4px 12px rgba(0,0,0,.1);}
+
 /* ABOUT */
+#about .about-photo{aspect-ratio:16/9;margin-bottom:24px;}
 #about .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;}
 @media(max-width:760px){#about .about-grid{grid-template-columns:1fr;}}
 #about .lede{font-size:16.5px;color:#3A3E45;max-width:60ch;margin-bottom:16px;}
@@ -126,7 +133,7 @@ section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 .expect-grid p{font-size:14px;color:var(--slate);}
 
 /* EVENTS */
-#events{background:var(--paper);}
+#events{background:var(--cream);}
 .event{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);transition:padding-left .2s ease;}
 .event:last-child{border-bottom:none;}
 .event:hover{padding-left:8px;}
@@ -137,6 +144,34 @@ section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 .event p{color:var(--slate);font-size:14.5px;}
 .event .tag{display:inline-block;margin-top:6px;font-size:11.5px;color:var(--gold);border:1px solid var(--gold-soft);border-radius:20px;padding:2px 10px;}
 
+/* BLOG */
+#blog{background:var(--paper);}
+.blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+@media(max-width:680px){.blog-grid{grid-template-columns:1fr;}}
+.blog-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease;}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(13,23,48,.08);}
+.blog-card .img-frame{aspect-ratio:16/10;}
+.blog-card .blog-body{padding:22px;}
+.blog-card h3{font-size:18px;margin-bottom:8px;}
+.blog-card p{font-size:14.5px;color:var(--slate);margin-bottom:14px;}
+.blog-card a.read-more{color:var(--gold);font-weight:700;font-size:13.5px;text-decoration:none;}
+.blog-card a.read-more:hover{text-decoration:underline;}
+
+.blog-post{display:none;background:var(--cream);padding:56px 0 80px;}
+.blog-post .post-wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+.blog-post .back-link{display:inline-block;margin-bottom:24px;color:var(--navy);font-weight:600;text-decoration:none;font-size:14px;}
+.blog-post .post-hero{aspect-ratio:16/7;border-radius:8px;margin-bottom:28px;}
+.blog-post .byline{color:var(--gold);font-size:13.5px;margin-bottom:24px;}
+.blog-post h1{font-size:clamp(26px,4vw,36px);margin-bottom:14px;line-height:1.22;}
+.blog-post h2{font-size:20px;margin:30px 0 10px;}
+.blog-post p{font-size:16px;color:#3A3E45;margin-bottom:16px;}
+.blog-post blockquote{border-left:3px solid var(--gold);padding-left:16px;font-style:italic;color:var(--slate);margin:20px 0;}
+.blog-post ol{margin:6px 0 16px 22px;}
+.blog-post li{margin-bottom:8px;color:#3A3E45;}
+.blog-post .post-cta{background:var(--navy-deep);color:var(--cream);border-radius:8px;padding:28px;margin-top:36px;text-align:center;}
+.blog-post .post-cta p{color:#C9D0E2;}
+.blog-post .seo-note{margin-top:40px;padding-top:20px;border-top:1px dashed var(--line);font-size:12px;color:#A79A82;}
+
 /* BOOK / CONTACT (shared form styles) */
 .split-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;}
 .split-grid > *{min-width:0;}
@@ -144,6 +179,7 @@ section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 .info-block p{margin-bottom:14px;color:#3A3E45;font-size:15px;}
 .info-block a{color:var(--navy);font-weight:600;text-decoration:none;}
 .info-block .label{display:block;font-size:12px;letter-spacing:.03em;color:var(--gold);margin-bottom:3px;}
+.contact-photo{aspect-ratio:16/9;margin-bottom:16px;}
 form{display:flex;flex-direction:column;gap:14px;background:#fff;padding:28px;border-radius:6px;border:1px solid var(--line);min-width:0;}
 input,textarea,select{font-family:'Karla',sans-serif;padding:12px 13px;border-radius:4px;border:1px solid var(--line);background:var(--cream);color:var(--ink);font-size:15px;width:100%;min-width:0;max-width:100%;}
 input::placeholder,textarea::placeholder{color:#A6A08F;}
@@ -180,6 +216,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#book">Book</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -189,17 +226,23 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
 </nav>
 <div class="nav-scrim" id="nav-scrim"></div>
 
-<header class="hero" id="home">
-  <div class="wrap">
-    <p class="kicker">Healing. Growth. Purpose.</p>
-    <h1>Professional Family &amp; Marriage Counselling in Port Harcourt &amp; Online</h1>
-    <p class="lead">You don't have to carry it alone. Get faith-based, professional support for your marriage, family, and personal healing.</p>
-    <a class="btn" href="#book">Book Your Session</a>
-    <a class="btn outline" href="https://wa.me/2348118315972" target="_blank" rel="noopener">WhatsApp Us</a>
+<header class="hero page-section" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Healing. Growth. Purpose.</p>
+      <h1>Professional Family &amp; Marriage Counselling in Port Harcourt &amp; Online</h1>
+      <p class="lead">You don't have to carry it alone. Get faith-based, professional support for your marriage, family, and personal healing.</p>
+      <a class="btn" href="#book">Book Your Session</a>
+      <a class="btn outline" href="https://wa.me/2348118315972" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+    <div class="img-frame round hero-photo">
+      <img src="Hero.jpg" alt="Hero" onerror="this.parentElement.classList.add('img-missing')">
+      <span class="img-fallback">Add photo:<br>hero-remy.jpg</span>
+    </div>
   </div>
 </header>
 
-<section id="problems">
+<section id="problems" class="page-section">
   <div class="wrap">
     <p class="kicker">The Problems We Solve</p>
     <h2>Is your home feeling more like a battleground than a safe place?</h2>
@@ -213,7 +256,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="why">
+<section id="why" class="page-section">
   <div class="wrap">
     <p class="kicker">Why Dr. Remy Nkeng</p>
     <div class="why-text">
@@ -225,22 +268,40 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="testimony">
+<section id="testimony" class="page-section">
   <div class="wrap">
     <p class="q">"Counselling with Dr. Remy saved our marriage. We learned how to talk again."</p>
     <p class="a">- A &amp; B, Port Harcourt</p>
   </div>
 </section>
 
-<section id="final-cta">
+<section id="final-cta" class="page-section">
   <div class="wrap">
     <h2>Your family deserves peace.</h2>
     <a class="btn" href="#book">Book a Confidential Session Today</a>
   </div>
 </section>
 
-<section id="about">
+<section id="gallery" class="page-section">
   <div class="wrap">
+    <p class="kicker">Moments</p>
+    <h2 style="font-size:22px;">From sessions and community gatherings</h2>
+    <div class="gallery-row">
+      <div class="img-frame circle"><img src="about1.jpg" alt="Gallery photo 1" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">gallery-1.jpg</span></div>
+      <div class="img-frame circle"><img src="about2.jpg" alt="Gallery photo 2" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">gallery-2.jpg</span></div>
+      <div class="img-frame circle"><img src="about3.jpg" alt="Gallery photo 3" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">gallery-3.jpg</span></div>
+      <div class="img-frame circle"><img src="about4.jpg" alt="Gallery photo 4" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">gallery-4.jpg</span></div>
+    </div>
+    <p class="note">Add up to four square photos (they'll auto-crop into circles) via gallery-1.jpg&ndash;gallery-4.jpg.</p>
+  </div>
+</section>
+
+<section id="about" class="page-section">
+  <div class="wrap">
+    <div class="img-frame round about-photo">
+      <img src="about3.jpg" alt="Dr. Remy Nkeng in a counselling session" onerror="this.parentElement.classList.add('img-missing')">
+      <span class="img-fallback">Add photo: about-remy.jpg</span>
+    </div>
     <p class="kicker">Meet Dr. Remy Nkeng</p>
     <h2>Professional Counsellor | Family Ministry Advocate | Port Harcourt</h2>
     <div class="about-grid">
@@ -267,7 +328,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="services">
+<section id="services" class="page-section">
   <div class="wrap">
     <p class="kicker">Services</p>
     <h2>How I Can Help Your Family</h2>
@@ -281,7 +342,6 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
     </div>
     <p style="margin-top:32px;font-weight:700;color:var(--navy-deep);">Online &amp; In-Person Available in Port Harcourt</p>
     <p style="color:#3A3E45;">Subsidized slots: ₦5,000 - ₦10,000 for students, pastors, and those in need. Limited spaces.</p>
-
     <div style="margin-top:40px;">
       <h3 style="font-size:19px;">What to Expect:</h3>
       <div class="expect-grid">
@@ -294,7 +354,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="events">
+<section id="events" class="page-section">
   <div class="wrap">
     <p class="kicker">What's Coming Up</p>
     <h2>Events &amp; Programs</h2>
@@ -310,17 +370,41 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
       <div class="date"><b>21</b><small>DEC</small></div>
       <div><h3>Family Fellowship &amp; Healing Circle</h3><p>A gathering for families to connect, share, and receive prayer and support.</p><span class="tag">Open to all</span></div>
     </div>
-    
   </div>
 </section>
 
-<section id="book">
+<section id="blog" class="page-section">
+  <div class="wrap">
+    <p class="kicker">From the Blog</p>
+    <h2>Insights for Your Marriage &amp; Family</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="img-frame"><img src="blog1.jpg" alt="5 Ways to Communicate Without Fighting" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">blog-communication.jpg</span></div>
+        <div class="blog-body">
+          <h3>5 Ways to Communicate Without Fighting in Your Marriage</h3>
+          <p>Silence. Shouting. Sarcasm. There's a 4th way: connection. Five practical tools to start talking without fighting today.</p>
+          <a class="read-more" href="#post-communication">Read More &rarr;</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="img-frame"><img src="blog2.jpg" alt="How to Heal After Infidelity" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">blog-infidelity.jpg</span></div>
+        <div class="blog-body">
+          <h3>How to Heal After Infidelity: 3 Steps Before You Decide to Stay or Leave</h3>
+          <p>Infidelity doesn't just break trust — it breaks your world. Three steps to take before making any big decision.</p>
+          <a class="read-more" href="#post-infidelity">Read More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="page-section">
   <div class="wrap">
     <p class="kicker">Book Your Session</p>
     <h2>Schedule via WhatsApp or online calendar</h2>
     <div class="split-grid">
       <div class="info-block">
-        <p><span class="label">WHATSAPP</span><a href="https://wa.me/2348118315972" target="_blank" rel="noopener" style="color:var(--gold-soft);">+234 803 899 6205</a></p>
+        <p><span class="label">WHATSAPP</span><a href="https://wa.me/2348118315972" target="_blank" rel="noopener" style="color:var(--gold-soft);">+234 811 831 5972</a></p>
         <p style="color:#B9C0D0;">Fill in the details and tap the button — it opens a pre-filled WhatsApp message to Dr. Remy so you can confirm your session directly.</p>
       </div>
       <form id="booking-form">
@@ -342,7 +426,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="faq">
+<section id="faq" class="page-section">
   <div class="wrap">
     <p class="kicker">FAQ</p>
     <h2>Frequently Asked Questions</h2>
@@ -354,7 +438,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
   </div>
 </section>
 
-<section id="contact" style="border-bottom:none;">
+<section id="contact" class="page-section" style="border-bottom:none;">
   <div class="wrap">
     <p class="kicker">Contact</p>
     <h2>Reach Dr. Remy Nkeng</h2>
@@ -365,15 +449,136 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
         <p><span class="label">EMAIL</span><a href="mailto:africa4lovefamily@gmail.com">africa4lovefamily@gmail.com</a></p>
         <p class="note">All sessions confidential.</p>
       </div>
-      <form id="enquiry-form">
-        <input type="text" id="name" placeholder="Your name" required>
-        <input type="email" id="email" placeholder="Your email" required>
-        <textarea id="message" placeholder="Your message" required></textarea>
-        <button type="submit" class="btn">Send enquiry</button>
-      </form>
+      <div>
+        <div class="img-frame round contact-photo">
+          <img src="Contact.png" alt="Get in touch with Dr. Remy Nkeng" onerror="this.parentElement.classList.add('img-missing')">
+          <span class="img-fallback">Add photo: contact-remy.jpg</span>
+        </div>
+        <form id="enquiry-form">
+          <input type="text" id="name" placeholder="Your name" required>
+          <input type="email" id="email" placeholder="Your email" required>
+          <textarea id="message" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn">Send enquiry</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- BLOG POST: Communication -->
+<article class="blog-post" id="post-communication">
+  <div class="post-wrap">
+    <a class="back-link" href="#home">&larr; Back to Home</a>
+    <div class="img-frame round post-hero"><img src="blog-communication.jpg" alt="5 Ways to Communicate Without Fighting" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">blog-communication.jpg</span></div>
+    <h1>5 Ways to Communicate Without Fighting in Your Marriage</h1>
+    <p class="byline">By Dr. Remy Nkeng | Professional Counsellor, Port Harcourt</p>
+
+    <p>Marriage is beautiful. But if we're honest, some weeks your home feels more like a debate stage than a safe place.</p>
+    <p>Silence. Shouting. Sarcasm.<br>For many couples in Port Harcourt and across Nigeria, those are the only 3 "communication styles" we learned.</p>
+    <p>But there's a 4th way: <strong>connection</strong>.</p>
+    <p>The Bible says, <em>"Plans are established by counsel"</em> - Proverbs 20:18. That means healthy homes are built on healthy communication.</p>
+    <p>Here are <strong>5 practical ways</strong> you can start talking without fighting today:</p>
+
+    <h2>1. Use "I Feel" Instead of "You Always"</h2>
+    <p>When we feel hurt, our first instinct is to blame.<br><em>"You never listen to me!"</em> shuts your spouse down.</p>
+    <p>Try this instead: <em>"I feel unheard when I'm talking and the TV is on. Can we pause it for 10 minutes?"</em></p>
+    <p>"I feel" statements take ownership. They invite conversation instead of war.</p>
+
+    <h2>2. Use The 20-Minute Rule</h2>
+    <p>When voices rise and emotions get hot, your brain literally can't think straight.<br>Agree on a rule: <em>When it's getting heated, we take 20 minutes to cool down, pray, then come back.</em></p>
+    <p>The goal isn't to win the argument. The goal is to understand each other.</p>
+    <blockquote>"A soft answer turns away wrath" - Proverbs 15:1</blockquote>
+
+    <h2>3. Ask "Do You Want Advice or Just to Be Heard?"</h2>
+    <p>Most men default to "fixing". Most women default to "sharing".<br>This causes frustration. He thinks she wants solutions. She thinks he doesn't care.</p>
+    <p>Before you give advice, ask: <em>"Babe, do you want me to help you solve this, or do you just need me to listen right now?"</em></p>
+    <p>That one question can prevent 80% of fights.</p>
+
+    <h2>4. Schedule a Weekly "State of The Union" Talk</h2>
+    <p>Don't wait for problems to explode. Schedule 30 minutes every week. No phones. No kids.<br>Ask 3 questions:</p>
+    <ol>
+      <li><strong>What went well</strong> for us this week?</li>
+      <li><strong>What hurt</strong> or bothered me?</li>
+      <li><strong>What do we need</strong> from each other next week?</li>
+    </ol>
+    <p>Small, consistent check-ins prevent big blow-ups.</p>
+
+    <h2>5. End Every Hard Talk With Prayer or Appreciation</h2>
+    <p>Never go to bed with bitterness in your heart. Even after a tough conversation, find one thing to appreciate.<br><em>"Thank you for being honest with me, even though it was hard."</em></p>
+    <p>Prayer covers what words can't. Appreciation heals what criticism breaks.</p>
+
+    <h2>Final Thought</h2>
+    <p>Good communication is a skill, not a gift. It can be learned.</p>
+    <p>If you and your spouse keep having the same argument on repeat, it's not because you don't love each other. It's because you don't have the tools yet.</p>
+    <p>You don't have to figure this out alone.</p>
+
+    <div class="post-cta">
+      <h3 style="color:var(--cream);margin-bottom:8px;">Book a Confidential Couples Session in Port Harcourt or Online</h3>
+      <p>Let's build the communication tools your marriage needs to thrive.<br><em>Healing. Growth. Purpose.</em></p>
+      <a class="btn" href="#book">Book Your Session</a>
+    </div>
+    <p class="seo-note">Title Tag: 5 Ways to Communicate Without Fighting | Marriage Counselling Port Harcourt &middot; Meta Description: Tired of fighting with your spouse? Dr. Remy Nkeng shares 5 practical ways to communicate better in your marriage. Book online or in-person counselling in Port Harcourt.</p>
+  </div>
+</article>
+
+<!-- BLOG POST: Infidelity -->
+<article class="blog-post" id="post-infidelity">
+  <div class="post-wrap">
+    <a class="back-link" href="#home">&larr; Back to Home</a>
+    <div class="img-frame round post-hero"><img src="blog-infidelity.jpg" alt="How to Heal After Infidelity" onerror="this.parentElement.classList.add('img-missing')"><span class="img-fallback">blog-infidelity.jpg</span></div>
+    <h1>How to Heal After Infidelity: 3 Steps Before You Decide to Stay or Leave</h1>
+    <p class="byline">By Dr. Remy Nkeng | Professional Counsellor, Port Harcourt</p>
+
+    <p>Infidelity doesn't just break trust.<br>It breaks your world.</p>
+    <p>One day you think you know your marriage. The next day, everything feels like a lie.<br>The shock, the anger, the numbness, the questions — <em>"Was any of it real?"</em> — it's overwhelming.</p>
+    <p>If you're reading this, you're probably hurting deeply. And I want you to know: <strong>You're not crazy for feeling this way. You're not weak for being confused.</strong></p>
+    <p>Healing is possible. Whether your marriage survives or not, <em>you</em> can heal.<br>Before you make any big decision, take these <strong>3 steps</strong>:</p>
+
+    <h2>Step 1: Stop The Bleeding</h2>
+    <p>When someone is bleeding, you don't start physical therapy. You stop the bleeding first.</p>
+    <p>In infidelity, "stopping the bleeding" means:</p>
+    <ol>
+      <li><strong>Full transparency</strong> - No more lies, no more hiding phones or deleting messages</li>
+      <li><strong>Cut all contact</strong> with the third party immediately. No "closure" conversations</li>
+      <li><strong>Create safety</strong> - Separate bedrooms if needed. Agree on boundaries for now</li>
+    </ol>
+    <p>This isn't healing yet. This is triage. You can't think clearly or decide wisely while you're still in crisis mode.</p>
+
+    <h2>Step 2: Process The Pain With Help</h2>
+    <p>Don't do this alone. Please.</p>
+    <p>Pain shared with the wrong people turns into bitterness. Pain kept inside turns into depression.<br>You need a neutral, confidential space to process rage, grief, shame, and fear.</p>
+    <p>A professional counsellor helps you to:</p>
+    <ol>
+      <li><strong>Regulate emotions</strong> so you don't make permanent decisions from temporary pain</li>
+      <li><strong>Understand what happened</strong> - without blaming yourself or excusing the betrayal</li>
+      <li><strong>Learn tools</strong> for communication, boundaries, and rebuilding or letting go</li>
+    </ol>
+    <p>Trying to "pray it away" or "just forgive and move on" without processing often leads to the same wound reopening later.</p>
+
+    <h2>Step 3: Decide From Healing, Not From Hurt</h2>
+    <p>The biggest mistake couples make is deciding while they're still bleeding.</p>
+    <p>Ask these questions when things are a little calmer and you have support:</p>
+    <ol>
+      <li><strong>Can trust be rebuilt?</strong> Are both people willing to do the hard, long work?</li>
+      <li><strong>Is there genuine remorse and repentance?</strong> Or just regret at being caught?</li>
+      <li><strong>What does forgiveness look like?</strong> Forgiveness doesn't mean forgetting. It means choosing not to use it as a weapon.</li>
+      <li><strong>What kind of marriage do we want to build now?</strong> You can't go back to the old one. You have to build a new one.</li>
+    </ol>
+    <p>Some marriages don't survive infidelity. And that's okay. You can still heal and have a purposeful life.<br>But many marriages <em>do</em> survive — and they become deeper, more honest, and stronger than before.</p>
+    <blockquote>Luke 4:18 "He came to heal the brokenhearted."</blockquote>
+
+    <h2>Final Thought</h2>
+    <p>You don't have to figure this out alone at 2am.</p>
+    <p>Whether you're trying to rebuild or trying to find peace to walk away, you deserve support, clarity, and a safe place.</p>
+
+    <div class="post-cta">
+      <h3 style="color:var(--cream);margin-bottom:8px;">Book a Confidential Session</h3>
+      <p>I offer private Individual and Couples Counselling in Port Harcourt and Online across Nigeria. We'll walk through this one step at a time.<br><em>Healing. Growth. Purpose.</em></p>
+      <a class="btn" href="#book">Book Your Session</a>
+    </div>
+    <p class="seo-note">Title Tag: Heal After Infidelity | Marriage Counselling Port Harcourt Nigeria &middot; Meta Description: Hurt by infidelity? Learn 3 critical steps before deciding to stay or leave. Get confidential couples counselling with Dr. Remy Nkeng in Port Harcourt &amp; Online.</p>
+  </div>
+</article>
 
 <a class="wa-float" href="https://wa.me/2348118315972" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#9743;</a>
 
@@ -383,7 +588,7 @@ footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
     <p class="foot-line">Dr. Remy Nkeng | Port Harcourt, Rivers State</p>
     <p class="foot-line">WhatsApp: <a href="https://wa.me/2348118315972" target="_blank" rel="noopener">+2348118315972</a> | Email: <a href="mailto:africa4lovefamily@gmail.com">africa4lovefamily@gmail.com</a></p>
     <div class="foot-bottom">
-      <p>&#169;&#65039; 2026. All sessions confidential. &middot; Site built by <a href="" target="_blank" rel="noopener">Dev TJay</a></p>
+      <p>&#169;&#65039; 2026. All sessions confidential. &middot; Site built by <a href="https://portfolio-website-dev-tjay.vercel.app/" target="_blank" rel="noopener">Dev TJay</a></p>
     </div>
   </div>
 </footer>
@@ -419,20 +624,14 @@ document.getElementById('booking-form').addEventListener('submit', function(e){
   var links = document.getElementById('nav-links');
   var scrim = document.getElementById('nav-scrim');
   function closeMenu(){
-    toggle.classList.remove('open');
-    links.classList.remove('open');
-    scrim.classList.remove('open');
+    toggle.classList.remove('open'); links.classList.remove('open'); scrim.classList.remove('open');
     toggle.setAttribute('aria-expanded','false');
   }
   function openMenu(){
-    toggle.classList.add('open');
-    links.classList.add('open');
-    scrim.classList.add('open');
+    toggle.classList.add('open'); links.classList.add('open'); scrim.classList.add('open');
     toggle.setAttribute('aria-expanded','true');
   }
-  toggle.addEventListener('click', function(){
-    links.classList.contains('open') ? closeMenu() : openMenu();
-  });
+  toggle.addEventListener('click', function(){ links.classList.contains('open') ? closeMenu() : openMenu(); });
   scrim.addEventListener('click', closeMenu);
   links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 })();
@@ -440,25 +639,37 @@ document.getElementById('booking-form').addEventListener('submit', function(e){
 /* Active nav link on scroll (scrollspy) */
 (function(){
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('#nav-links a'));
-  var sections = navLinks
-    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
-    .filter(Boolean);
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
   if(!sections.length) return;
-
-  function setActive(id){
-    navLinks.forEach(function(a){
-      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-    });
-  }
-
+  function setActive(id){ navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); }); }
   var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){ setActive(entry.target.id); }
-    });
+    entries.forEach(function(entry){ if(entry.isIntersecting){ setActive(entry.target.id); } });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
   sections.forEach(function(sec){ observer.observe(sec); });
   setActive(sections[0].id);
+})();
+
+/* Blog post routing (hash-based "pages") */
+(function(){
+  var pageSections = Array.prototype.slice.call(document.querySelectorAll('.page-section'));
+  var posts = Array.prototype.slice.call(document.querySelectorAll('.blog-post'));
+  function showPost(id){
+    posts.forEach(function(p){ p.style.display = (p.id === id) ? 'block' : 'none'; });
+    pageSections.forEach(function(s){ s.style.display = id ? 'none' : ''; });
+    window.scrollTo(0,0);
+  }
+  function route(){
+    var h = location.hash.replace('#','');
+    var target = document.getElementById(h);
+    if(target && target.classList.contains('blog-post')){
+      showPost(h);
+    } else {
+      showPost(null);
+      if(h){ var t = document.getElementById(h); if(t){ setTimeout(function(){ t.scrollIntoView(); }, 30); } }
+    }
+  }
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
