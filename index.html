@@ -30,42 +30,77 @@ a{color:inherit;}
 .kicker{font-size:13px;letter-spacing:.06em;color:var(--gold);font-weight:600;margin-bottom:10px;}
 
 /* NAV */
-nav{position:sticky;top:0;top:env(safe-area-inset-top,0px);background:var(--navy-deep);z-index:20;border-bottom:1px solid rgba(255,255,255,.08);}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;gap:10px;}
-.brand{display:flex;align-items:center;gap:12px;}
-.mark{width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:16px;border:2px solid var(--gold-soft);}
+nav{position:sticky;top:0;top:env(safe-area-inset-top,0px);background:var(--navy-deep);z-index:30;border-bottom:1px solid rgba(255,255,255,.08);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:10px;}
+.brand{display:flex;align-items:center;gap:12px;min-width:0;}
+.logo-img{height:42px;width:auto;max-width:140px;object-fit:contain;display:block;flex-shrink:0;}
+@media(max-width:480px){.logo-img{height:34px;max-width:96px;}}
+.brand-text{min-width:0;}
 .brand-text span{display:block;}
-.brand-text .full{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.2;}
+.brand-text .full{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .brand-text .sub{color:#93A0BF;font-size:11px;letter-spacing:.04em;}
-nav ul{list-style:none;display:flex;gap:24px;flex-wrap:wrap;}
-nav a{color:#CBD2E3;text-decoration:none;font-size:14.5px;}
+nav ul{list-style:none;display:flex;gap:24px;}
+nav a{color:#CBD2E3;text-decoration:none;font-size:14.5px;transition:color .15s ease;position:relative;padding-bottom:4px;}
 nav a:hover,nav a:focus{color:var(--gold);}
+nav a.active{color:var(--gold);font-weight:600;}
+nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--gold);border-radius:2px;}
+@media(max-width:760px){nav a.active::after{display:none;}nav a.active{color:var(--gold-soft);}}
+.nav-toggle{display:none;flex:none;width:34px;height:34px;border:none;background:transparent;cursor:pointer;position:relative;}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:6px;right:6px;height:2px;background:var(--cream);transition:transform .2s ease,opacity .2s ease;}
+.nav-toggle span{top:16px;}
+.nav-toggle span::before{top:-8px;}
+.nav-toggle span::after{top:8px;}
+.nav-toggle.open span{background:transparent;}
+.nav-toggle.open span::before{transform:translateY(8px) rotate(45deg);background:var(--cream);}
+.nav-toggle.open span::after{transform:translateY(-8px) rotate(-45deg);background:var(--cream);}
+.nav-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:25;}
+.nav-scrim.open{display:block;}
+@media(max-width:760px){
+  .nav-toggle{display:block;}
+  nav ul{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(260px,74vw);background:var(--navy-deep);flex-direction:column;gap:0;padding:calc(90px + env(safe-area-inset-top,0px)) 28px 28px;transform:translateX(100%);transition:transform .25s ease;box-shadow:-8px 0 24px rgba(0,0,0,.3);z-index:26;}
+  nav ul.open{transform:translateX(0);}
+  nav ul li{border-bottom:1px solid rgba(255,255,255,.08);}
+  nav ul li a{display:block;padding:14px 0;font-size:16px;}
+}
 
 /* HERO */
 header.hero{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);position:relative;overflow:hidden;padding:80px 0 72px;}
 header.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(200,155,60,.16),transparent 70%);}
 header.hero .wrap{position:relative;max-width:720px;}
-header.hero p.kicker{color:var(--gold-soft);}
-header.hero h1{font-size:clamp(32px,5vw,48px);line-height:1.14;color:var(--cream);margin-bottom:18px;font-weight:600;}
+header.hero p.kicker{color:var(--gold-soft);font-size:16px;}
+header.hero h1{font-size:clamp(30px,5vw,44px);line-height:1.18;color:var(--cream);margin-bottom:18px;font-weight:600;}
 header.hero p.lead{font-size:18.5px;color:#C9D0E2;max-width:54ch;margin-bottom:30px;}
-.btn{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:13px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.02em;}
+.btn{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:13px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.02em;border:none;cursor:pointer;}
 .btn.outline{background:transparent;border:1.5px solid rgba(255,255,255,.45);color:var(--cream);margin-left:12px;}
 .btn:hover{opacity:.9;}
-.stat-bar{display:flex;gap:36px;margin-top:52px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:28px;}
-.stat b{display:block;font-family:'Fraunces',serif;font-size:28px;color:var(--gold-soft);}
-.stat span{font-size:13px;color:#9AA4BE;}
 
 /* SECTIONS */
-section{padding:64px 0;border-bottom:1px solid var(--line);}
-section h2{font-size:30px;margin-bottom:10px;font-weight:600;}
-section p.section-sub{color:var(--slate);margin-bottom:34px;max-width:62ch;font-size:16px;}
+section{padding:60px 0;border-bottom:1px solid var(--line);}
+section h2{font-size:28px;margin-bottom:14px;font-weight:600;}
 .note{margin-top:18px;font-size:12.5px;color:#A79A82;font-style:italic;}
+
+/* PROBLEMS / WHY / TESTIMONY / FINAL CTA */
+#problems ol{list-style:none;display:flex;flex-direction:column;gap:14px;margin:24px 0;max-width:640px;}
+#problems ol li{padding-left:34px;position:relative;font-size:16px;color:#3A3E45;}
+#problems ol li b{color:var(--navy-deep);}
+#problems ol{counter-reset:prob;}
+#problems ol li::before{counter-increment:prob;content:counter(prob);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy-deep);font-family:'Fraunces',serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+#problems .scripture{margin-top:8px;font-style:italic;color:var(--slate);}
+#why{background:var(--paper);}
+#why .why-text{max-width:640px;font-size:17px;color:#3A3E45;}
+#why .why-text p{margin-bottom:14px;}
+#testimony{background:var(--navy-deep);color:var(--cream);text-align:center;}
+#testimony .wrap{max-width:640px;}
+#testimony p.q{font-family:'Fraunces',serif;font-size:22px;font-style:italic;color:var(--cream);margin-bottom:16px;}
+#testimony p.a{color:var(--gold-soft);font-weight:600;font-size:14px;}
+#final-cta{text-align:center;border-bottom:none;}
+#final-cta h2{font-size:26px;}
 
 /* ABOUT */
 #about .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;}
 @media(max-width:760px){#about .about-grid{grid-template-columns:1fr;}}
-#about .lede{font-size:17px;color:#3A3E45;max-width:60ch;margin-bottom:20px;}
-.values{display:flex;flex-direction:column;gap:18px;}
+#about .lede{font-size:16.5px;color:#3A3E45;max-width:60ch;margin-bottom:16px;}
+.values{display:flex;flex-direction:column;gap:16px;}
 .value-item{display:flex;gap:14px;}
 .value-item .num{font-family:'Fraunces',serif;color:var(--gold);font-size:20px;min-width:28px;}
 .value-item h4{font-size:15.5px;margin-bottom:3px;}
@@ -79,68 +114,42 @@ section p.section-sub{color:var(--slate);margin-bottom:34px;max-width:62ch;font-
 #services{background:var(--paper);}
 .grid{display:grid;gap:22px;}
 .grid.three{grid-template-columns:repeat(3,1fr);}
-.grid.two{grid-template-columns:repeat(2,1fr);}
-@media(max-width:760px){.grid.three,.grid.two{grid-template-columns:1fr;}}
-.card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:26px;}
-.card .icon{width:40px;height:40px;border-radius:50%;background:rgba(200,155,60,.14);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;margin-bottom:14px;}
-.card h3{font-size:18px;margin-bottom:8px;font-weight:600;}
+@media(max-width:760px){.grid.three{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(13,23,48,.08);border-color:var(--gold-soft);}
+.card h3{font-size:17.5px;margin-bottom:8px;font-weight:600;}
+.svc-meta{display:inline-block;color:var(--gold);font-weight:700;font-size:13.5px;letter-spacing:.02em;background:rgba(200,155,60,.12);border-radius:20px;padding:4px 12px;margin-bottom:12px;}
 .card p{color:var(--slate);font-size:14.5px;}
+.expect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px;}
+@media(max-width:760px){.expect-grid{grid-template-columns:1fr;}}
+.expect-grid h4{font-size:15.5px;margin-bottom:4px;color:var(--navy-deep);}
+.expect-grid p{font-size:14px;color:var(--slate);}
 
-/* LEADERSHIP */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-@media(max-width:760px){.team-grid{grid-template-columns:1fr;}}
-.team-card{text-align:center;}
-.avatar{width:88px;height:88px;border-radius:50%;background:var(--navy);color:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:24px;margin:0 auto 14px;}
-.team-card h4{font-size:15.5px;margin-bottom:2px;}
-.team-card span{font-size:12.5px;color:var(--gold);display:block;margin-bottom:8px;}
-.team-card p{font-size:13.5px;color:var(--slate);}
-
-/* EVENTS */
-.event{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);}
-.event:last-child{border-bottom:none;}
-.event .date{min-width:74px;height:74px;background:var(--navy);color:var(--cream);border-radius:6px;text-align:center;padding-top:12px;font-family:'Fraunces',serif;}
-.event .date b{display:block;font-size:22px;line-height:1;}
-.event .date small{font-size:10.5px;letter-spacing:.04em;}
-.event h3{font-size:17.5px;margin-bottom:4px;font-weight:600;}
-.event p{color:var(--slate);font-size:14.5px;}
-.event .tag{display:inline-block;margin-top:6px;font-size:11.5px;color:var(--gold);border:1px solid var(--gold-soft);border-radius:20px;padding:2px 10px;}
-
-/* TESTIMONIALS */
-#testimonials{background:var(--navy-deep);color:var(--cream);}
-#testimonials h2{color:var(--cream);}
-#testimonials p.section-sub{color:#A9B2CB;}
-.quote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
-@media(max-width:760px){.quote-grid{grid-template-columns:1fr;}}
-.quote-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:26px;}
-.quote-card p.q{font-size:15.5px;color:#DCE1EE;margin-bottom:16px;}
-.quote-card p.a{font-size:13.5px;color:var(--gold-soft);font-weight:600;}
-
-/* CONTACT */
-#contact{background:var(--paper);}
-.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;}
-@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
-.contact-info p{margin-bottom:14px;color:#3A3E45;font-size:15px;}
-.contact-info a{color:var(--navy);font-weight:600;text-decoration:none;}
-.contact-info .label{display:block;font-size:12px;letter-spacing:.03em;color:var(--gold);margin-bottom:3px;}
+/* BOOK / CONTACT (shared form styles) */
+.split-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;}
+@media(max-width:760px){.split-grid{grid-template-columns:1fr;}}
+.info-block p{margin-bottom:14px;color:#3A3E45;font-size:15px;}
+.info-block a{color:var(--navy);font-weight:600;text-decoration:none;}
+.info-block .label{display:block;font-size:12px;letter-spacing:.03em;color:var(--gold);margin-bottom:3px;}
 form{display:flex;flex-direction:column;gap:14px;background:#fff;padding:28px;border-radius:6px;border:1px solid var(--line);}
-input,textarea{font-family:'Karla',sans-serif;padding:12px 13px;border-radius:4px;border:1px solid var(--line);background:var(--cream);color:var(--ink);font-size:15px;}
+input,textarea,select{font-family:'Karla',sans-serif;padding:12px 13px;border-radius:4px;border:1px solid var(--line);background:var(--cream);color:var(--ink);font-size:15px;}
 input::placeholder,textarea::placeholder{color:#A6A08F;}
-textarea{resize:vertical;min-height:110px;}
-form .btn{border:none;cursor:pointer;align-self:flex-start;}
+textarea{resize:vertical;min-height:100px;}
+form .btn{align-self:flex-start;}
+#book{background:var(--navy-deep);color:var(--cream);}
+#book h2{color:var(--cream);}
+#book .kicker{color:var(--gold-soft);}
+#book form{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);}
 
-.wa-float{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:20px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.28);font-size:27px;z-index:20;}
+.wa-float{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:20px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.28);font-size:27px;z-index:20;transition:transform .2s ease;}
+.wa-float:hover{transform:scale(1.08);}
 
-footer{background:var(--navy-deep);color:#8C93A8;padding:44px 0 26px;}
-.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;margin-bottom:30px;}
-@media(max-width:680px){.footer-grid{grid-template-columns:1fr;}}
-footer h4{color:var(--cream);font-size:14px;margin-bottom:12px;font-family:'Karla',sans-serif;font-weight:700;}
-footer .foot-about{font-size:13.5px;color:#8C93A8;max-width:38ch;}
-footer ul{list-style:none;}
-footer ul li{margin-bottom:8px;font-size:13.5px;}
-footer a{color:#8C93A8;text-decoration:none;}
-footer a:hover{color:var(--gold-soft);}
-.foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;font-size:12.5px;text-align:center;}
-.foot-bottom a{color:var(--gold);}
+footer{background:var(--navy-deep);color:#8C93A8;padding:40px 0 26px;text-align:center;}
+footer .foot-tag{color:var(--cream);font-family:'Fraunces',serif;font-size:18px;margin-bottom:8px;}
+footer .foot-line{font-size:14px;margin-bottom:6px;}
+footer .foot-line a{color:var(--gold-soft);text-decoration:none;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:18px;padding-top:16px;font-size:12.5px;}
+.foot-bottom a{color:var(--gold);text-decoration:none;}
 </style>
 </head>
 <body>
@@ -148,144 +157,184 @@ footer a:hover{color:var(--gold-soft);}
 <nav>
   <div class="wrap">
     <div class="brand">
-      <div class="mark">DF</div>
+      <img src="dfmilogo.PNG" alt="DFMI logo" class="logo-img" id="site-logo">
       <div class="brand-text">
         <span class="full">Dynamic Family Missions</span>
         <span class="sub">INTERNATIONAL</span>
       </div>
     </div>
-    <ul>
+    <ul id="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#leadership">Leadership</a></li>
-      <li><a href="#events">Events</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
   </div>
 </nav>
+<div class="nav-scrim" id="nav-scrim"></div>
 
 <header class="hero" id="home">
   <div class="wrap">
-    <p class="kicker">DYNAMIC FAMILY MISSIONS INTERNATIONAL &middot; PORT HARCOURT</p>
-    <h1>Strengthening families, building faith, restoring communities.</h1>
-    <p class="lead">DFMI walks alongside parents, couples, and young people in Port Harcourt and beyond — offering counsel, teaching, and fellowship that help families grow stronger in faith and in one another.</p>
-    <a class="btn" href="#contact">Get in touch</a>
-    <a class="btn outline" href="#services">Explore our work</a>
-    <div class="stat-bar">
-      <div class="stat"><b>10+</b><span>Years of ministry</span></div>
-      <div class="stat"><b>500+</b><span>Families reached</span></div>
-      <div class="stat"><b>30+</b><span>Programs run yearly</span></div>
-    </div>
+    <p class="kicker">Healing. Growth. Purpose.</p>
+    <h1>Professional Family &amp; Marriage Counselling in Port Harcourt &amp; Online</h1>
+    <p class="lead">You don't have to carry it alone. Get faith-based, professional support for your marriage, family, and personal healing.</p>
+    <a class="btn" href="#book">Book Your Session</a>
+    <a class="btn outline" href="https://wa.me/2348038996205" target="_blank" rel="noopener">WhatsApp Us</a>
   </div>
 </header>
 
+<section id="problems">
+  <div class="wrap">
+    <p class="kicker">The Problems We Solve</p>
+    <h2>Is your home feeling more like a battleground than a safe place?</h2>
+    <p style="color:#3A3E45;">We help families in Port Harcourt and across Nigeria:</p>
+    <ol>
+      <li><b>Rebuild Communication</b> - Stop the fights. Start understanding each other again.</li>
+      <li><b>Heal From Hurt</b> - Trauma, infidelity, grief, and generational patterns.</li>
+      <li><b>Raise Strong Families</b> - Parenting, purpose, and peace in your home.</li>
+    </ol>
+    <p class="scripture">"Plans are established by counsel" - Proverbs 20:18</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <p class="kicker">Why Dr. Remy Nkeng</p>
+    <div class="why-text">
+      <p>I'm Dr. Remy Nkeng, a Professional Counsellor with a heart for families.</p>
+      <p>My approach blends professional counselling tools with biblical wisdom — because true healing touches the mind, heart, and spirit.</p>
+      <p>Whether online or in-person, you'll get a safe, confidential space to grow.</p>
+    </div>
+    <a class="btn" href="#about">Meet Dr. Remy</a>
+  </div>
+</section>
+
+<section id="testimony">
+  <div class="wrap">
+    <p class="q">"Counselling with Dr. Remy saved our marriage. We learned how to talk again."</p>
+    <p class="a">- A &amp; B, Port Harcourt</p>
+  </div>
+</section>
+
+<section id="final-cta">
+  <div class="wrap">
+    <h2>Your family deserves peace.</h2>
+    <a class="btn" href="#book">Book a Confidential Session Today</a>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap">
-    <p class="kicker">WHO WE ARE</p>
-    <h2>About DFMI</h2>
+    <p class="kicker">Meet Dr. Remy Nkeng</p>
+    <h2>Professional Counsellor | Family Ministry Advocate | Port Harcourt</h2>
     <div class="about-grid">
       <div>
-        <p class="lede">Dynamic Family Missions International is a family-focused ministry based in Port Harcourt, Nigeria. We exist to equip parents, strengthen marriages, and raise children in faith — through teaching, counsel, and community programs that bring families closer to God and to one another.</p>
+        <p class="lede">I believe every family was designed for healing, growth, and purpose.</p>
+        <p class="lede">Life gets heavy. Marriages get silent. Parents get tired. Children get lost.</p>
+        <p class="lede">That's why I started this ministry — to provide a safe place where families can be restored.</p>
+        <p class="lede">With years of experience in counselling and ministry, I help individuals, couples, and families:</p>
         <div class="values">
-          <div class="value-item"><span class="num">01</span><div><h4>Faith-centered homes</h4><p>Helping families build daily life around shared belief and prayer.</p></div></div>
-          <div class="value-item"><span class="num">02</span><div><h4>Restored relationships</h4><p>Supporting couples and families through counsel and reconciliation.</p></div></div>
-          <div class="value-item"><span class="num">03</span><div><h4>Raised-up generations</h4><p>Discipling children and youth to carry faith and character forward.</p></div></div>
+          <div class="value-item"><span class="num">01</span><div><h4>Process pain without shame</h4></div></div>
+          <div class="value-item"><span class="num">02</span><div><h4>Communicate without war</h4></div></div>
+          <div class="value-item"><span class="num">03</span><div><h4>Build homes rooted in love, truth, and faith</h4></div></div>
         </div>
       </div>
       <div class="about-card">
-        <h3>Our Mission</h3>
-        <p>To strengthen families in Port Harcourt and beyond through faith-based teaching, counsel, and community programs.</p>
-        <h3>Our Vision</h3>
-        <p>A generation of homes rooted in faith, love, and lasting unity.</p>
+        <h3>My Approach</h3>
+        <p>Professional + Compassionate + Faith-based.</p>
+        <p>You can choose to include prayer and scripture in your sessions, or keep it strictly professional. The goal is the same: your healing.</p>
+        <p>I'm based in Port Harcourt, and I also offer secure online sessions across Nigeria and beyond.</p>
+        <p>This is more than counselling. This is ministry to the home.</p>
+        <a class="btn" href="#book" style="margin-top:6px;">Book a Session With Me</a>
       </div>
     </div>
-    <p class="note">Replace the text above with DFMI's own mission, vision and founding story.</p>
   </div>
 </section>
 
 <section id="services">
   <div class="wrap">
-    <p class="kicker">HOW WE SERVE</p>
-    <h2>Our Services</h2>
-    <p class="section-sub">Programs and support we offer to families in our community, from counsel to celebration.</p>
+    <p class="kicker">Services</p>
+    <h2>How I Can Help Your Family</h2>
     <div class="grid three">
-      <div class="card"><div class="icon">01</div><h3>Family Counseling</h3><p>One-on-one and group guidance for couples and parents navigating life's challenges together.</p></div>
-      <div class="card"><div class="icon">02</div><h3>Marriage Enrichment</h3><p>Workshops and retreats designed to strengthen marriages and deepen lifelong commitment.</p></div>
-      <div class="card"><div class="icon">03</div><h3>Children &amp; Youth Discipleship</h3><p>Mentorship and faith formation programs that shape character in the next generation.</p></div>
-      <div class="card"><div class="icon">04</div><h3>Parenting Workshops</h3><p>Practical, faith-rooted sessions equipping parents for every stage of raising children.</p></div>
-      <div class="card"><div class="icon">05</div><h3>Community Outreach</h3><p>Support for families facing hardship, through visitation, welfare and prayer.</p></div>
-      <div class="card"><div class="icon">06</div><h3>Prayer &amp; Fellowship</h3><p>Regular gatherings for worship, prayer and encouragement among families.</p></div>
+      <div class="card"><h3>Individual Counselling</h3><span class="svc-meta">₦20,000 &middot; 50-60 mins</span><p>Anxiety, identity, purpose, grief, habits, self-esteem. Find clarity and healing.</p></div>
+      <div class="card"><h3>Marriage &amp; Couples Counselling</h3><span class="svc-meta">₦35,000 &middot; 60-80 mins</span><p>Communication breakdown, conflict, intimacy, trust issues. Learn to fight fair and love well.</p></div>
+      <div class="card"><h3>Premarital Counselling</h3><span class="svc-meta">₦150,000 &middot; 6-Session Package</span><p>Prepare your foundation before "I do". Money, sex, family, faith, and conflict.</p></div>
+      <div class="card"><h3>Family Counselling</h3><span class="svc-meta">₦40,000 &middot; 60-80 mins</span><p>Parenting struggles, sibling issues, boundaries, and family healing.</p></div>
+      <div class="card"><h3>Relationship Recovery</h3><span class="svc-meta">Session Fee Applies</span><p>Breakups, infidelity, and rebuilding trust after betrayal.</p></div>
+      <div class="card"><h3>Trauma-Informed Support</h3><span class="svc-meta">Session Fee Applies</span><p>A safe space to process past pain and step into freedom.</p></div>
     </div>
-    <p class="note">Replace these six services with DFMI's actual program names and descriptions.</p>
+    <p style="margin-top:32px;font-weight:700;color:var(--navy-deep);">Online &amp; In-Person Available in Port Harcourt</p>
+    <p style="color:#3A3E45;">Subsidized slots: ₦5,000 - ₦10,000 for students, pastors, and those in need. Limited spaces.</p>
+
+    <div style="margin-top:40px;">
+      <h3 style="font-size:19px;">What to Expect:</h3>
+      <div class="expect-grid">
+        <div><h4>1. Book</h4><p>Schedule via WhatsApp or online calendar</p></div>
+        <div><h4>2. Intake</h4><p>Fill a confidential form before session 1</p></div>
+        <div><h4>3. Heal</h4><p>50-80 min session with practical tools + homework</p></div>
+      </div>
+    </div>
+    <a class="btn" href="#book" style="margin-top:32px;">Book Your First Session</a>
   </div>
 </section>
 
-<section id="leadership">
+<section id="book">
   <div class="wrap">
-    <p class="kicker">MEET THE TEAM</p>
-    <h2>Our Leadership</h2>
-    <p class="section-sub">The team guiding DFMI's work in Port Harcourt.</p>
-    <div class="team-grid">
-      <div class="team-card"><div class="avatar">RN</div><h4>Remy Nkeng</h4><span>Founder &amp; Director</span><p>Leads DFMI's vision and oversees its family ministry programs.</p></div>
-      <div class="team-card"><div class="avatar">&bull;</div><h4>Team Member Name</h4><span>Role / Title</span><p>Short bio describing their role at DFMI.</p></div>
-      <div class="team-card"><div class="avatar">&bull;</div><h4>Team Member Name</h4><span>Role / Title</span><p>Short bio describing their role at DFMI.</p></div>
+    <p class="kicker">Book Your Session</p>
+    <h2>Schedule via WhatsApp or online calendar</h2>
+    <div class="split-grid">
+      <div class="info-block">
+        <p><span class="label">WHATSAPP</span><a href="https://wa.me/2348038996205" target="_blank" rel="noopener" style="color:var(--gold-soft);">+234 803 899 6205</a></p>
+        <p style="color:#B9C0D0;">Fill in the details and tap the button — it opens a pre-filled WhatsApp message to Dr. Remy so you can confirm your session directly.</p>
+      </div>
+      <form id="booking-form">
+        <input type="text" id="book-name" placeholder="Your name" required>
+        <select id="book-service" required>
+          <option value="" disabled selected>Select a service</option>
+          <option>Individual Counselling (₦20,000, 50-60 mins)</option>
+          <option>Marriage &amp; Couples Counselling (₦35,000, 60-80 mins)</option>
+          <option>Premarital Counselling (₦150,000, 6-Session Package)</option>
+          <option>Family Counselling (₦40,000, 60-80 mins)</option>
+          <option>Relationship Recovery (Session Fee Applies)</option>
+          <option>Trauma-Informed Support (Session Fee Applies)</option>
+        </select>
+        <input type="text" id="book-datetime" placeholder="Preferred date &amp; time">
+        <textarea id="book-message" placeholder="Anything you'd like Dr. Remy to know (optional)"></textarea>
+        <button type="submit" class="btn">Continue on WhatsApp</button>
+      </form>
     </div>
-    <p class="note">Add real names, titles, photos and bios for your leadership team.</p>
   </div>
 </section>
 
-<section id="events">
+<section id="faq">
   <div class="wrap">
-    <p class="kicker">WHAT'S COMING UP</p>
-    <h2>Events &amp; Programs</h2>
-    <p class="section-sub">Upcoming gatherings — check back for updates or contact us to be added to our mailing list.</p>
-    <div class="event">
-      <div class="date"><b>14</b><small>NOV</small></div>
-      <div><h3>Family Fellowship Sunday</h3><p>A gathering for families in the Port Harcourt community, with worship, teaching and a shared meal.</p><span class="tag">Open to all</span></div>
+    <p class="kicker">FAQ</p>
+    <h2>Frequently Asked Questions</h2>
+    <div class="values" style="max-width:680px;">
+      <div class="value-item"><span class="num">Q</span><div><h4>Is online counselling effective?</h4><p>Yes. We use Zoom/Google Meet in a private, confidential setting.</p></div></div>
+      <div class="value-item"><span class="num">Q</span><div><h4>Is it confidential?</h4><p>100%. Except in cases of danger or abuse, as required by law.</p></div></div>
+      <div class="value-item"><span class="num">Q</span><div><h4>Do you have to be Christian?</h4><p>No. Faith-based tools are optional and only used if you consent.</p></div></div>
     </div>
-    <div class="event">
-      <div class="date"><b>05</b><small>DEC</small></div>
-      <div><h3>Marriage Enrichment Seminar</h3><p>A half-day session for couples covering communication, conflict and commitment.</p><span class="tag">Couples</span></div>
-    </div>
-    <div class="event">
-      <div class="date"><b>21</b><small>DEC</small></div>
-      <div><h3>Children's Christmas Program</h3><p>A festive afternoon of songs, drama and games for children and their families.</p><span class="tag">Family-friendly</span></div>
-    </div>
-    <p class="note">Replace with your real dates, titles, venues and times.</p>
   </div>
 </section>
 
-<section id="testimonials">
+<section id="contact" style="border-bottom:none;">
   <div class="wrap">
-    <p class="kicker">FROM OUR FAMILIES</p>
-    <h2>Words from our community</h2>
-    <p class="section-sub">What families who've walked with DFMI have to say.</p>
-    <div class="quote-grid">
-      <div class="quote-card"><p class="q">"DFMI's counsel helped restore our marriage during a very difficult season. We are grateful for their patience and prayers."</p><p class="a">&mdash; A DFMI family</p></div>
-      <div class="quote-card"><p class="q">"Our children have grown so much through the youth discipleship program. It has shaped their character in lasting ways."</p><p class="a">&mdash; A DFMI parent</p></div>
-    </div>
-    <p class="note" style="color:#7C859E;">Replace with real testimonials from your community (with permission).</p>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <p class="kicker">REACH OUT</p>
-    <h2>Contact Us</h2>
-    <p class="section-sub">We'd love to hear from you. Send an enquiry below, or reach us directly.</p>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <p><span class="label">LOCATION</span>Port Harcourt, Rivers State, Nigeria</p>
-        <p><span class="label">PHONE / WHATSAPP</span><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">+234 000 000 0000</a></p>
-        <p><span class="label">EMAIL</span><a href="mailto:info@dfmi.org">info@dfmi.org</a></p>
-        <p><span class="label">SERVICE TIMES</span>Sundays, 9:00 AM &mdash; details to be confirmed</p>
-        <p class="note">Replace the phone number, email and address above with DFMI's real details.</p>
+    <p class="kicker">Contact</p>
+    <h2>Reach Dr. Remy Nkeng</h2>
+    <div class="split-grid">
+      <div class="info-block">
+        <p><span class="label">LOCATION</span>Port Harcourt, Rivers State</p>
+        <p><span class="label">WHATSAPP</span><a href="https://wa.me/2348038996205" target="_blank" rel="noopener">+234 803 899 6205</a></p>
+        <p><span class="label">EMAIL</span><a href="mailto:africa4lovefamily@gmail.com">africa4lovefamily@gmail.com</a></p>
+        <p class="note">All sessions confidential.</p>
       </div>
       <form id="enquiry-form">
         <input type="text" id="name" placeholder="Your name" required>
         <input type="email" id="email" placeholder="Your email" required>
-        <input type="text" id="subject" placeholder="Subject (optional)">
         <textarea id="message" placeholder="Your message" required></textarea>
         <button type="submit" class="btn">Send enquiry</button>
       </form>
@@ -293,36 +342,15 @@ footer a:hover{color:var(--gold-soft);}
   </div>
 </section>
 
-<a class="wa-float" href="https://wa.me/2340000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#9743;</a>
+<a class="wa-float" href="https://wa.me/2348038996205" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#9743;</a>
 
 <footer>
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <h4>Dynamic Family Missions International</h4>
-        <p class="foot-about">A family ministry based in Port Harcourt, dedicated to nurturing strong homes and vibrant faith across generations.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#about">About DFMI</a></li>
-          <li><a href="#services">Our Services</a></li>
-          <li><a href="#events">Events &amp; Programs</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="mailto:info@dfmi.org">Email us</a></li>
-          <li><a href="#">Facebook (add link)</a></li>
-          <li><a href="#">Instagram (add link)</a></li>
-        </ul>
-      </div>
-    </div>
+    <p class="foot-tag">Healing. Growth. Purpose.</p>
+    <p class="foot-line">Dr. Remy Nkeng | Port Harcourt, Rivers State</p>
+    <p class="foot-line">WhatsApp: <a href="https://wa.me/2348038996205" target="_blank" rel="noopener">+2348038996205</a> | Email: <a href="mailto:africa4lovefamily@gmail.com">africa4lovefamily@gmail.com</a></p>
     <div class="foot-bottom">
-      <p>&copy; 2026 Dynamic Family Missions International. All rights reserved. Built by <a href="https://claude.com" target="_blank" rel="noopener">Claude</a>.</p>
+      <p>&#169;&#65039; 2026. All sessions confidential. &middot; Site built with <a href="https://claude.com" target="_blank" rel="noopener">Claude</a></p>
     </div>
   </div>
 </footer>
@@ -332,12 +360,73 @@ document.getElementById('enquiry-form').addEventListener('submit', function(e){
   e.preventDefault();
   var name = document.getElementById('name').value;
   var email = document.getElementById('email').value;
-  var subject = document.getElementById('subject').value || ('DFMI Website Enquiry from ' + name);
   var message = document.getElementById('message').value;
-  var mailSubject = encodeURIComponent(subject);
+  var subject = encodeURIComponent('DFMI Website Enquiry from ' + name);
   var body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
-  window.location.href = 'mailto:info@dfmi.org?subject=' + mailSubject + '&body=' + body;
+  window.location.href = 'mailto:africa4lovefamily@gmail.com?subject=' + subject + '&body=' + body;
 });
+
+document.getElementById('booking-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('book-name').value;
+  var service = document.getElementById('book-service').value;
+  var when = document.getElementById('book-datetime').value;
+  var msg = document.getElementById('book-message').value;
+  var text = 'Hi Dr. Remy, I would like to book a session.\n\n' +
+    'Name: ' + name + '\n' +
+    'Service: ' + service + '\n' +
+    (when ? 'Preferred date/time: ' + when + '\n' : '') +
+    (msg ? 'Message: ' + msg : '');
+  window.open('https://wa.me/2348038996205?text=' + encodeURIComponent(text), '_blank');
+});
+
+/* Mobile nav toggle */
+(function(){
+  var toggle = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  var scrim = document.getElementById('nav-scrim');
+  function closeMenu(){
+    toggle.classList.remove('open');
+    links.classList.remove('open');
+    scrim.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+  function openMenu(){
+    toggle.classList.add('open');
+    links.classList.add('open');
+    scrim.classList.add('open');
+    toggle.setAttribute('aria-expanded','true');
+  }
+  toggle.addEventListener('click', function(){
+    links.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  scrim.addEventListener('click', closeMenu);
+  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+})();
+
+/* Active nav link on scroll (scrollspy) */
+(function(){
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#nav-links a'));
+  var sections = navLinks
+    .map(function(a){ return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+  if(!sections.length) return;
+
+  function setActive(id){
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ setActive(entry.target.id); }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function(sec){ observer.observe(sec); });
+  setActive(sections[0].id);
+})();
 </script>
 </body>
 </html>
