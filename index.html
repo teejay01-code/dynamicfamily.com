@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dynamic Family Missions International</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2A4A;
+  --navy-deep:#0D1730;
+  --gold:#C89B3C;
+  --gold-soft:#E8CE96;
+  --cream:#FBF8F2;
+  --paper:#F3EEE3;
+  --ink:#22262E;
+  --slate:#565C68;
+  --line:#E1DACB;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:inherit;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:74px;}
+body{font-family:'Karla',sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--navy-deep);}
+a{color:inherit;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+.kicker{font-size:13px;letter-spacing:.06em;color:var(--gold);font-weight:600;margin-bottom:10px;}
+
+/* NAV */
+nav{position:sticky;top:0;top:env(safe-area-inset-top,0px);background:var(--navy-deep);z-index:20;border-bottom:1px solid rgba(255,255,255,.08);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;gap:10px;}
+.brand{display:flex;align-items:center;gap:12px;}
+.mark{width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:16px;border:2px solid var(--gold-soft);}
+.brand-text span{display:block;}
+.brand-text .full{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.2;}
+.brand-text .sub{color:#93A0BF;font-size:11px;letter-spacing:.04em;}
+nav ul{list-style:none;display:flex;gap:24px;flex-wrap:wrap;}
+nav a{color:#CBD2E3;text-decoration:none;font-size:14.5px;}
+nav a:hover,nav a:focus{color:var(--gold);}
+
+/* HERO */
+header.hero{background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);position:relative;overflow:hidden;padding:80px 0 72px;}
+header.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(200,155,60,.16),transparent 70%);}
+header.hero .wrap{position:relative;max-width:720px;}
+header.hero p.kicker{color:var(--gold-soft);}
+header.hero h1{font-size:clamp(32px,5vw,48px);line-height:1.14;color:var(--cream);margin-bottom:18px;font-weight:600;}
+header.hero p.lead{font-size:18.5px;color:#C9D0E2;max-width:54ch;margin-bottom:30px;}
+.btn{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:13px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:14.5px;letter-spacing:.02em;}
+.btn.outline{background:transparent;border:1.5px solid rgba(255,255,255,.45);color:var(--cream);margin-left:12px;}
+.btn:hover{opacity:.9;}
+.stat-bar{display:flex;gap:36px;margin-top:52px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:28px;}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:28px;color:var(--gold-soft);}
+.stat span{font-size:13px;color:#9AA4BE;}
+
+/* SECTIONS */
+section{padding:64px 0;border-bottom:1px solid var(--line);}
+section h2{font-size:30px;margin-bottom:10px;font-weight:600;}
+section p.section-sub{color:var(--slate);margin-bottom:34px;max-width:62ch;font-size:16px;}
+.note{margin-top:18px;font-size:12.5px;color:#A79A82;font-style:italic;}
+
+/* ABOUT */
+#about .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;}
+@media(max-width:760px){#about .about-grid{grid-template-columns:1fr;}}
+#about .lede{font-size:17px;color:#3A3E45;max-width:60ch;margin-bottom:20px;}
+.values{display:flex;flex-direction:column;gap:18px;}
+.value-item{display:flex;gap:14px;}
+.value-item .num{font-family:'Fraunces',serif;color:var(--gold);font-size:20px;min-width:28px;}
+.value-item h4{font-size:15.5px;margin-bottom:3px;}
+.value-item p{font-size:14px;color:var(--slate);}
+.about-card{background:var(--navy-deep);color:var(--cream);border-radius:6px;padding:26px;}
+.about-card h3{color:var(--gold-soft);font-size:16px;margin-bottom:10px;}
+.about-card p{font-size:14.5px;color:#C9D0E2;margin-bottom:16px;}
+.about-card p:last-child{margin-bottom:0;}
+
+/* SERVICES */
+#services{background:var(--paper);}
+.grid{display:grid;gap:22px;}
+.grid.three{grid-template-columns:repeat(3,1fr);}
+.grid.two{grid-template-columns:repeat(2,1fr);}
+@media(max-width:760px){.grid.three,.grid.two{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:26px;}
+.card .icon{width:40px;height:40px;border-radius:50%;background:rgba(200,155,60,.14);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;margin-bottom:14px;}
+.card h3{font-size:18px;margin-bottom:8px;font-weight:600;}
+.card p{color:var(--slate);font-size:14.5px;}
+
+/* LEADERSHIP */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:760px){.team-grid{grid-template-columns:1fr;}}
+.team-card{text-align:center;}
+.avatar{width:88px;height:88px;border-radius:50%;background:var(--navy);color:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:24px;margin:0 auto 14px;}
+.team-card h4{font-size:15.5px;margin-bottom:2px;}
+.team-card span{font-size:12.5px;color:var(--gold);display:block;margin-bottom:8px;}
+.team-card p{font-size:13.5px;color:var(--slate);}
+
+/* EVENTS */
+.event{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);}
+.event:last-child{border-bottom:none;}
+.event .date{min-width:74px;height:74px;background:var(--navy);color:var(--cream);border-radius:6px;text-align:center;padding-top:12px;font-family:'Fraunces',serif;}
+.event .date b{display:block;font-size:22px;line-height:1;}
+.event .date small{font-size:10.5px;letter-spacing:.04em;}
+.event h3{font-size:17.5px;margin-bottom:4px;font-weight:600;}
+.event p{color:var(--slate);font-size:14.5px;}
+.event .tag{display:inline-block;margin-top:6px;font-size:11.5px;color:var(--gold);border:1px solid var(--gold-soft);border-radius:20px;padding:2px 10px;}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--navy-deep);color:var(--cream);}
+#testimonials h2{color:var(--cream);}
+#testimonials p.section-sub{color:#A9B2CB;}
+.quote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+@media(max-width:760px){.quote-grid{grid-template-columns:1fr;}}
+.quote-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:26px;}
+.quote-card p.q{font-size:15.5px;color:#DCE1EE;margin-bottom:16px;}
+.quote-card p.a{font-size:13.5px;color:var(--gold-soft);font-weight:600;}
+
+/* CONTACT */
+#contact{background:var(--paper);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+.contact-info p{margin-bottom:14px;color:#3A3E45;font-size:15px;}
+.contact-info a{color:var(--navy);font-weight:600;text-decoration:none;}
+.contact-info .label{display:block;font-size:12px;letter-spacing:.03em;color:var(--gold);margin-bottom:3px;}
+form{display:flex;flex-direction:column;gap:14px;background:#fff;padding:28px;border-radius:6px;border:1px solid var(--line);}
+input,textarea{font-family:'Karla',sans-serif;padding:12px 13px;border-radius:4px;border:1px solid var(--line);background:var(--cream);color:var(--ink);font-size:15px;}
+input::placeholder,textarea::placeholder{color:#A6A08F;}
+textarea{resize:vertical;min-height:110px;}
+form .btn{border:none;cursor:pointer;align-self:flex-start;}
+
+.wa-float{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:20px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.28);font-size:27px;z-index:20;}
+
+footer{background:var(--navy-deep);color:#8C93A8;padding:44px 0 26px;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;margin-bottom:30px;}
+@media(max-width:680px){.footer-grid{grid-template-columns:1fr;}}
+footer h4{color:var(--cream);font-size:14px;margin-bottom:12px;font-family:'Karla',sans-serif;font-weight:700;}
+footer .foot-about{font-size:13.5px;color:#8C93A8;max-width:38ch;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:8px;font-size:13.5px;}
+footer a{color:#8C93A8;text-decoration:none;}
+footer a:hover{color:var(--gold-soft);}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;font-size:12.5px;text-align:center;}
+.foot-bottom a{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">DF</div>
+      <div class="brand-text">
+        <span class="full">Dynamic Family Missions</span>
+        <span class="sub">INTERNATIONAL</span>
+      </div>
+    </div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <p class="kicker">DYNAMIC FAMILY MISSIONS INTERNATIONAL &middot; PORT HARCOURT</p>
+    <h1>Strengthening families, building faith, restoring communities.</h1>
+    <p class="lead">DFMI walks alongside parents, couples, and young people in Port Harcourt and beyond — offering counsel, teaching, and fellowship that help families grow stronger in faith and in one another.</p>
+    <a class="btn" href="#contact">Get in touch</a>
+    <a class="btn outline" href="#services">Explore our work</a>
+    <div class="stat-bar">
+      <div class="stat"><b>10+</b><span>Years of ministry</span></div>
+      <div class="stat"><b>500+</b><span>Families reached</span></div>
+      <div class="stat"><b>30+</b><span>Programs run yearly</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <p class="kicker">WHO WE ARE</p>
+    <h2>About DFMI</h2>
+    <div class="about-grid">
+      <div>
+        <p class="lede">Dynamic Family Missions International is a family-focused ministry based in Port Harcourt, Nigeria. We exist to equip parents, strengthen marriages, and raise children in faith — through teaching, counsel, and community programs that bring families closer to God and to one another.</p>
+        <div class="values">
+          <div class="value-item"><span class="num">01</span><div><h4>Faith-centered homes</h4><p>Helping families build daily life around shared belief and prayer.</p></div></div>
+          <div class="value-item"><span class="num">02</span><div><h4>Restored relationships</h4><p>Supporting couples and families through counsel and reconciliation.</p></div></div>
+          <div class="value-item"><span class="num">03</span><div><h4>Raised-up generations</h4><p>Discipling children and youth to carry faith and character forward.</p></div></div>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Our Mission</h3>
+        <p>To strengthen families in Port Harcourt and beyond through faith-based teaching, counsel, and community programs.</p>
+        <h3>Our Vision</h3>
+        <p>A generation of homes rooted in faith, love, and lasting unity.</p>
+      </div>
+    </div>
+    <p class="note">Replace the text above with DFMI's own mission, vision and founding story.</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <p class="kicker">HOW WE SERVE</p>
+    <h2>Our Services</h2>
+    <p class="section-sub">Programs and support we offer to families in our community, from counsel to celebration.</p>
+    <div class="grid three">
+      <div class="card"><div class="icon">01</div><h3>Family Counseling</h3><p>One-on-one and group guidance for couples and parents navigating life's challenges together.</p></div>
+      <div class="card"><div class="icon">02</div><h3>Marriage Enrichment</h3><p>Workshops and retreats designed to strengthen marriages and deepen lifelong commitment.</p></div>
+      <div class="card"><div class="icon">03</div><h3>Children &amp; Youth Discipleship</h3><p>Mentorship and faith formation programs that shape character in the next generation.</p></div>
+      <div class="card"><div class="icon">04</div><h3>Parenting Workshops</h3><p>Practical, faith-rooted sessions equipping parents for every stage of raising children.</p></div>
+      <div class="card"><div class="icon">05</div><h3>Community Outreach</h3><p>Support for families facing hardship, through visitation, welfare and prayer.</p></div>
+      <div class="card"><div class="icon">06</div><h3>Prayer &amp; Fellowship</h3><p>Regular gatherings for worship, prayer and encouragement among families.</p></div>
+    </div>
+    <p class="note">Replace these six services with DFMI's actual program names and descriptions.</p>
+  </div>
+</section>
+
+<section id="leadership">
+  <div class="wrap">
+    <p class="kicker">MEET THE TEAM</p>
+    <h2>Our Leadership</h2>
+    <p class="section-sub">The team guiding DFMI's work in Port Harcourt.</p>
+    <div class="team-grid">
+      <div class="team-card"><div class="avatar">RN</div><h4>Remy Nkeng</h4><span>Founder &amp; Director</span><p>Leads DFMI's vision and oversees its family ministry programs.</p></div>
+      <div class="team-card"><div class="avatar">&bull;</div><h4>Team Member Name</h4><span>Role / Title</span><p>Short bio describing their role at DFMI.</p></div>
+      <div class="team-card"><div class="avatar">&bull;</div><h4>Team Member Name</h4><span>Role / Title</span><p>Short bio describing their role at DFMI.</p></div>
+    </div>
+    <p class="note">Add real names, titles, photos and bios for your leadership team.</p>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <p class="kicker">WHAT'S COMING UP</p>
+    <h2>Events &amp; Programs</h2>
+    <p class="section-sub">Upcoming gatherings — check back for updates or contact us to be added to our mailing list.</p>
+    <div class="event">
+      <div class="date"><b>14</b><small>NOV</small></div>
+      <div><h3>Family Fellowship Sunday</h3><p>A gathering for families in the Port Harcourt community, with worship, teaching and a shared meal.</p><span class="tag">Open to all</span></div>
+    </div>
+    <div class="event">
+      <div class="date"><b>05</b><small>DEC</small></div>
+      <div><h3>Marriage Enrichment Seminar</h3><p>A half-day session for couples covering communication, conflict and commitment.</p><span class="tag">Couples</span></div>
+    </div>
+    <div class="event">
+      <div class="date"><b>21</b><small>DEC</small></div>
+      <div><h3>Children's Christmas Program</h3><p>A festive afternoon of songs, drama and games for children and their families.</p><span class="tag">Family-friendly</span></div>
+    </div>
+    <p class="note">Replace with your real dates, titles, venues and times.</p>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <p class="kicker">FROM OUR FAMILIES</p>
+    <h2>Words from our community</h2>
+    <p class="section-sub">What families who've walked with DFMI have to say.</p>
+    <div class="quote-grid">
+      <div class="quote-card"><p class="q">"DFMI's counsel helped restore our marriage during a very difficult season. We are grateful for their patience and prayers."</p><p class="a">&mdash; A DFMI family</p></div>
+      <div class="quote-card"><p class="q">"Our children have grown so much through the youth discipleship program. It has shaped their character in lasting ways."</p><p class="a">&mdash; A DFMI parent</p></div>
+    </div>
+    <p class="note" style="color:#7C859E;">Replace with real testimonials from your community (with permission).</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="kicker">REACH OUT</p>
+    <h2>Contact Us</h2>
+    <p class="section-sub">We'd love to hear from you. Send an enquiry below, or reach us directly.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p><span class="label">LOCATION</span>Port Harcourt, Rivers State, Nigeria</p>
+        <p><span class="label">PHONE / WHATSAPP</span><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">+234 000 000 0000</a></p>
+        <p><span class="label">EMAIL</span><a href="mailto:info@dfmi.org">info@dfmi.org</a></p>
+        <p><span class="label">SERVICE TIMES</span>Sundays, 9:00 AM &mdash; details to be confirmed</p>
+        <p class="note">Replace the phone number, email and address above with DFMI's real details.</p>
+      </div>
+      <form id="enquiry-form">
+        <input type="text" id="name" placeholder="Your name" required>
+        <input type="email" id="email" placeholder="Your email" required>
+        <input type="text" id="subject" placeholder="Subject (optional)">
+        <textarea id="message" placeholder="Your message" required></textarea>
+        <button type="submit" class="btn">Send enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<a class="wa-float" href="https://wa.me/2340000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">&#9743;</a>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Dynamic Family Missions International</h4>
+        <p class="foot-about">A family ministry based in Port Harcourt, dedicated to nurturing strong homes and vibrant faith across generations.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About DFMI</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#events">Events &amp; Programs</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://wa.me/2340000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:info@dfmi.org">Email us</a></li>
+          <li><a href="#">Facebook (add link)</a></li>
+          <li><a href="#">Instagram (add link)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>&copy; 2026 Dynamic Family Missions International. All rights reserved. Built by <a href="https://claude.com" target="_blank" rel="noopener">Claude</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('enquiry-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('name').value;
+  var email = document.getElementById('email').value;
+  var subject = document.getElementById('subject').value || ('DFMI Website Enquiry from ' + name);
+  var message = document.getElementById('message').value;
+  var mailSubject = encodeURIComponent(subject);
+  var body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
+  window.location.href = 'mailto:info@dfmi.org?subject=' + mailSubject + '&body=' + body;
+});
+</script>
+</body>
+</html>
